@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Antigravity AI | Your Study Partner",
-  description: "Find the right person to study with, right now — and actually stick with it.",
+  title: "SyncStudy | Your Study Partner",
+  description: "Your ultimate collaborative study platform. Match with peers based on your goals and crush your next exam together!",
 };
 
 export default function RootLayout({
