@@ -14,7 +14,9 @@ export async function loginWithPassword(formData: FormData) {
   })
 
   if (error) {
-    return { error: error.message }
+    console.error("Supabase Login Error:", error);
+    const errorMessage = error?.message || (typeof error === 'object' ? JSON.stringify(error) : String(error)) || "Invalid login credentials";
+    return { error: errorMessage }
   }
 
   redirect('/dashboard')
