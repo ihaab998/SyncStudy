@@ -1,6 +1,6 @@
 import { createClient } from '@/utils/supabase/server'
-import { verifyStudent } from './actions'
 import { redirect } from 'next/navigation'
+import { revalidatePath } from 'next/cache'
 
 export default async function AdminDashboard() {
   const supabase = await createClient()
@@ -57,6 +57,7 @@ export default async function AdminDashboard() {
                     'use server'
                     const supabase = await createClient()
                     await supabase.from('profiles').update({ verification_status: 'verified' }).eq('id', profile.id)
+                    revalidatePath('/admin')
                   }} style={{ flex: 1 }}>
                     <button type="submit" className="btn-primary" style={{ width: '100%' }}>✅ Approve</button>
                   </form>
@@ -64,6 +65,7 @@ export default async function AdminDashboard() {
                     'use server'
                     const supabase = await createClient()
                     await supabase.from('profiles').update({ verification_status: 'rejected' }).eq('id', profile.id)
+                    revalidatePath('/admin')
                   }} style={{ flex: 1 }}>
                     <button type="submit" className="btn-secondary" style={{ width: '100%', borderColor: '#ef4444', color: '#ef4444' }}>❌ Reject</button>
                   </form>
@@ -102,6 +104,7 @@ export default async function AdminDashboard() {
                       'use server'
                       const supabase = await createClient()
                       await supabase.from('reports').update({ status: 'resolved' }).eq('id', report.id)
+                      revalidatePath('/admin')
                     }}>
                       <button type="submit" className="btn-primary" style={{ padding: '0.4rem 1rem' }}>Mark Resolved</button>
                     </form>
@@ -123,6 +126,7 @@ export default async function AdminDashboard() {
           if (userId) {
             const supabase = await createClient()
             await supabase.from('profiles').update({ verification_status: 'banned' }).eq('id', userId)
+            revalidatePath('/admin')
           }
         }} style={{ display: 'flex', gap: '1rem' }}>
           <input type="text" name="userId" placeholder="Enter User ID to ban..." className="input-field" style={{ flex: 1 }} required />
