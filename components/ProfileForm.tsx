@@ -41,8 +41,8 @@ export default function ProfileForm({ initialData, userId }: { initialData: any,
         setLoading(false)
         return
       }
-      
-      updates.student_id_url = filePath
+      const { data: publicUrlData } = supabase.storage.from('student_ids').getPublicUrl(filePath)
+      updates.student_id_url = publicUrlData.publicUrl
       updates.verification_status = 'pending' 
     }
 

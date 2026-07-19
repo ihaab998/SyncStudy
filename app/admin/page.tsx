@@ -49,7 +49,7 @@ export default async function AdminDashboard() {
                 </div>
                 
                 <div style={{ border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)', overflow: 'hidden' }}>
-                  <img src={profile.student_id_url} alt="Student ID" style={{ width: '100%', maxHeight: '300px', objectFit: 'contain', backgroundColor: '#000' }} />
+                  <img src={profile.student_id_url?.startsWith('http') ? profile.student_id_url : `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/student_ids/${profile.student_id_url}`} alt="Student ID" style={{ width: '100%', maxHeight: '300px', objectFit: 'contain', backgroundColor: '#000' }} />
                 </div>
 
                 <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
